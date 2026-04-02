@@ -38,8 +38,16 @@ public class Solution {
         //determine order based on payment
         ArrayList<Client> sortedClients = new ArrayList<>(clients); //based on payments
         //sort sortedClients
-        //either use sortedClients.sort() if allowed or manually do it. Use client.payment and client.alpha?
-
+        //either use sortedClients.sort() if allowed or manually do it. Use client.payment?
+        for (int i = 0; i < sortedClients.size(); i++) {
+            for (int j = i + 1; j < sortedClients.size(); j++) {
+                if (sortedClients.get(i).payment > sortedClients.get(j).payment) {
+                    Client temp = sortedClients.get(i);
+                    sortedClients.set(i, sortedClients.get(j));
+                    sortedClients.set(j, temp);
+                }
+            }
+        }
 
         //go down in order of priority
         //if Clients is [client2 = $1,client0 = $30,client1 = $100]
