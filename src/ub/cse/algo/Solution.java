@@ -41,10 +41,17 @@ public class Solution {
         //either use sortedClients.sort() if allowed or manually do it. Use client.payment?
         for (int i = 0; i < sortedClients.size(); i++) {
             for (int j = i + 1; j < sortedClients.size(); j++) {
-                if (sortedClients.get(i).payment > sortedClients.get(j).payment) {
-                    Client temp = sortedClients.get(i);
-                    sortedClients.set(i, sortedClients.get(j));
-                    sortedClients.set(j, temp);
+                Client client1 = sortedClients.get(i);
+                Client client2 = sortedClients.get(j);
+                if (client1.payment > client2.payment) {
+                    sortedClients.set(i, client2);
+                    sortedClients.set(j, client1);
+                }
+                else if (client1.payment == client2.payment) {
+                    if (client1.alpha > client2.alpha) {
+                        sortedClients.set(i, client2);
+                        sortedClients.set(j, client1);
+                    }
                 }
             }
         }
