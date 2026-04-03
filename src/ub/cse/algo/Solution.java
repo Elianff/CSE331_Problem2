@@ -46,7 +46,6 @@ public class Solution {
                 return Float.compare(a.alpha, b.alpha);
         });
 
-
         for (Client c : sortedClients) {
             PriorityQueue<int[]> todo = new PriorityQueue<>((a, b) -> a[1] - b[1]);
             int[] dist = new int[graph.size()];
