@@ -43,15 +43,9 @@ public class Solution {
             for (int j = i + 1; j < sortedClients.size(); j++) {
                 Client client1 = sortedClients.get(i);
                 Client client2 = sortedClients.get(j);
-                if (client1.payment > client2.payment) {
+                if (client1.payment/client1.alpha > client2.payment/client2.alpha) {
                     sortedClients.set(i, client2);
                     sortedClients.set(j, client1);
-                }
-                else if (client1.payment == client2.payment) {
-                    if (client1.alpha > client2.alpha) {
-                        sortedClients.set(i, client2);
-                        sortedClients.set(j, client1);
-                    }
                 }
             }
         }
