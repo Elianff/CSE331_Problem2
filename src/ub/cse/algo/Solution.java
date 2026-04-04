@@ -93,7 +93,7 @@ public class Solution {
                 }
             }
 
-            if (priority[client.id] != -1) {
+            if (priority[client.id] != -1) { //to make sure it exits, reconstruct path and backtrack
                 ArrayList<Integer> path = new ArrayList<>(); //initial plan for problem 1
                 int currentClient = client.id; //start from client
                 //backtrack from client to ISP
