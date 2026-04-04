@@ -70,25 +70,26 @@ public class Solution {
             int[] toQueue = {startNode, 0};    //increased steps to make it clearer, store the node and the cost, least cost prioritized
             todo.add(toQueue);
 
+            //Queue
             while (!todo.isEmpty()) {
                 int[] current = todo.poll();   // take first from queue
                 int node = current[0];         //current looks like {int, int} or {startNode, cost}
                 int cost = current[1];
 
-                if (node == client.id)
+                if (node == client.id)// removing client from the queue
                     break;
 
-                if (cost > distance[node])
+                if (cost > distance[node]) // comparing node distance with cost
                     continue;
 
-                for (Integer n : graph.get(node)) {
+                for (Integer n : graph.get(node)) {//going through all non-client nodes
                     int extra = (count[n] + 1)/ bandwidths.get(n);
                     int newCost = distance[node] + 1 + extra;
 
-                    if (newCost < distance[n]) {
+                    if (newCost < distance[n]) {//if distance of node to starting node is >than new cost
                         distance[n] = newCost;
                         priority[n] = node;
-                        todo.add(new int[]{n, newCost});
+                        todo.add(new int[]{n, newCost});//adding new cost to queue
                     }
                 }
             }
@@ -97,15 +98,15 @@ public class Solution {
                 ArrayList<Integer> path = new ArrayList<>();
                 int currentClient = client.id; //start from client
                 //backtrack from client to ISP
-                while (currentClient != startNode) {
-                    path.add(0, currentClient);
+                while (currentClient != startNode) {//condition for looping
+                    path.add(0, currentClient);//constructing path
                     currentClient = priority[currentClient];
                 }
 
                 path.add(0, startNode); //add ISP at front
                 sol.paths.put(client.id, path);
 
-                for (int i = 0; i < path.size()-1 ; i++) {
+                for (int i = 0; i < path.size()-1 ; i++) {//counting bandwidth to calculate new cost
                     count[path.get(i)]++;
                 }
             }
